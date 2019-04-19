@@ -1,0 +1,19 @@
+dast:
+  stage: test
+  image: registry.gitlab.com/gitlab-org/security-products/zaproxy
+  allow_failure: true
+  tags:
+    - security
+  services: []
+  variables:
+    DOCKER_DRIVER: overlay2
+  script:
+    - if [ -z $DAST_WEB_SITE ]; then echo "Please configure DAST_WEB_SITE env variable" && exit 1; fi
+    - mkdir /zap/wrk/
+    - /zap/zap-baseline.py -J gl-dast-report.json -t $DAST_WEB_SITE || true
+    - cp /zap/wrk/gl-dast-report.json .
+  artifacts:
+    paths:
+      - gl-dast-report.json
+    reports:
+      dast: gl-dast-report.json
