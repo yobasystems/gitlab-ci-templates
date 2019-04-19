@@ -16,8 +16,10 @@ guideline.
 
 To make runner run, then add the following tag: `security`
 
-
+```
 include:remote
+```
+
 include:remote can be used to include a file from a different location, using HTTP/HTTPS, referenced by using the full URL. The remote file must be publicly accessible through a simple GET request as authentication schemas in the remote URL is not supported. For example:
 
 ```

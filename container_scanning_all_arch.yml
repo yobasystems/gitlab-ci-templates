@@ -11,14 +11,14 @@ container_scanning amd64:
     CLAIR_HOST: $CLAIR_URL
   script:
     - apk add -U wget ca-certificates
-    - docker pull $DOCKER_REGISTRY/$DOCKER_REGISTRY_REPO:amd64
+    - docker pull $DOCKER_REGISTRY_DOCKERHUB_REPO:amd64
     - wget https://github.com/arminc/clair-scanner/releases/download/v8/clair-scanner_linux_amd64
     - mv clair-scanner_linux_amd64 clair-scanner
     - chmod +x clair-scanner
     - touch clair-whitelist.yml
     - retries=0
     - echo "Waiting for clair daemon to start"
-    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY/$DOCKER_REGISTRY_REPO:amd64 || true
+    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY_DOCKERHUB_REPO:amd64 || true
   artifacts:
     paths:
       - gl-sast-container-report-amd64.json
@@ -38,14 +38,14 @@ container_scanning arm32v7:
     CLAIR_HOST: $CLAIR_URL
   script:
     - apk add -U wget ca-certificates
-    - docker pull $DOCKER_REGISTRY/$DOCKER_REGISTRY_REPO:arm32v7
+    - docker pull $DOCKER_REGISTRY_DOCKERHUB_REPO:arm32v7
     - wget https://github.com/arminc/clair-scanner/releases/download/v8/clair-scanner_linux_amd64
     - mv clair-scanner_linux_amd64 clair-scanner
     - chmod +x clair-scanner
     - touch clair-whitelist.yml
     - retries=0
     - echo "Waiting for clair daemon to start"
-    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY/$DOCKER_REGISTRY_REPO:arm32v7 || true
+    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY_DOCKERHUB_REPO:arm32v7 || true
   artifacts:
     paths:
       - gl-sast-container-report-arm32v7.json
@@ -65,14 +65,14 @@ container_scanning arm64v8:
     CLAIR_HOST: $CLAIR_URL
   script:
     - apk add -U wget ca-certificates
-    - docker pull $DOCKER_REGISTRY/$DOCKER_REGISTRY_REPO:arm64v8
+    - docker pull $DOCKER_REGISTRY_DOCKERHUB_REPO:arm64v8
     - wget https://github.com/arminc/clair-scanner/releases/download/v8/clair-scanner_linux_amd64
     - mv clair-scanner_linux_amd64 clair-scanner
     - chmod +x clair-scanner
     - touch clair-whitelist.yml
     - retries=0
     - echo "Waiting for clair daemon to start"
-    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY/$DOCKER_REGISTRY_REPO:arm64v8 || true
+    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY_DOCKERHUB_REPO:arm64v8 || true
   artifacts:
     paths:
       - gl-sast-container-report-arm64v8.json
