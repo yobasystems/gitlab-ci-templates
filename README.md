@@ -22,7 +22,7 @@ include:remote can be used to include a file from a different location, using HT
 
 ```
 include:
-  - remote: 'https://gitlab.com/awesome-project/raw/master/.gitlab-ci-template.yml'
+  - remote: 'https://gitlab.com/yobasystems/gitlab-ci-templates/raw/master/container_scanning_all_arch.yml'
 ```
 
 All nested includes will be executed without context as public user, so only another remote, or public project, or template is allowed.
