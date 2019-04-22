@@ -18,7 +18,7 @@ container_scanning amd64:
     - touch clair-whitelist.yml
     - retries=0
     - echo "Waiting for clair daemon to start"
-    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY_DOCKERHUB_REPO:amd64 || true
+    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report-amd64.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY_DOCKERHUB_REPO:amd64 || true
   artifacts:
     paths:
       - gl-sast-container-report-amd64.json
@@ -45,7 +45,7 @@ container_scanning arm32v7:
     - touch clair-whitelist.yml
     - retries=0
     - echo "Waiting for clair daemon to start"
-    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY_DOCKERHUB_REPO:arm32v7 || true
+    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report-arm32v7.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY_DOCKERHUB_REPO:arm32v7 || true
   artifacts:
     paths:
       - gl-sast-container-report-arm32v7.json
@@ -72,7 +72,7 @@ container_scanning arm64v8:
     - touch clair-whitelist.yml
     - retries=0
     - echo "Waiting for clair daemon to start"
-    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY_DOCKERHUB_REPO:arm64v8 || true
+    - ./clair-scanner -c ${CLAIR_HOST} --ip $(hostname -i) -r gl-container-scanning-report-arm64v8.json -l clair.log -w clair-whitelist.yml $DOCKER_REGISTRY_DOCKERHUB_REPO:arm64v8 || true
   artifacts:
     paths:
       - gl-sast-container-report-arm64v8.json
