@@ -1,0 +1,17 @@
+repo supervisor:
+  stage: test
+  image: yobasystems/alpine-nodejs:min
+  allow_failure: true
+  tags:
+    - security
+  services:
+    - yobasystems/alpine-docker:dind
+  variables:
+    DOCKER_DRIVER: overlay2
+  script:
+    - enter here
+  artifacts:
+    paths:
+      - r-s.json
+    reports:
+      container_scanning: r-s.json
