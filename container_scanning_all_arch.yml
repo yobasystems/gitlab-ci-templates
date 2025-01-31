@@ -56,7 +56,6 @@ variables:
 
 container_scanning_amd64:
   <<: *container_scanning_definition
-  variables:
   tags:
     - security
   variables:
