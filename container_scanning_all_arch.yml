@@ -36,7 +36,10 @@ variables:
     reports:
       container_scanning: gl-container-scanning-report-${ARCH}.json
       cyclonedx: "**/gl-sbom-${ARCH}-*.cdx.json"
-    paths: [gl-container-scanning-report-${ARCH}.json, gl-dependency-scanning-report-${ARCH}.json, "**/gl-sbom-${ARCH}-*.cdx.json"]
+    paths:
+      - gl-container-scanning-report-${ARCH}.json
+      - gl-dependency-scanning-report-${ARCH}.json
+      - "**/gl-sbom-${ARCH}-*.cdx.json"
   dependencies: []
   script:
     - export CS_IMAGE="${CS_IMAGE}-${ARCH}"
