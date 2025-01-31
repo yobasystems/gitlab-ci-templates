@@ -57,14 +57,24 @@ variables:
 container_scanning_amd64:
   <<: *container_scanning_definition
   variables:
-    ARCH: "amd64"
+  tags:
+    - amd64
+  variables:
+    ARCH: amd64
+    PLATFORM: amd64
 
 container_scanning_armhf:
   <<: *container_scanning_definition
+  tags:
+    - armhf
   variables:
-    ARCH: "armhf"
+    ARCH: armhf
+    PLATFORM: arm/v7
 
 container_scanning_aarch64:
   <<: *container_scanning_definition
+  tags:
+    - aarch64
   variables:
-    ARCH: "aarch64"
+    ARCH: aarch64
+    PLATFORM: arm64/v8
