@@ -13,12 +13,12 @@ variables:
     access: 'developer'
     when: always
     reports:
-      container_scanning: "gl-container-scanning-report-${ARCH}.json"
-      cyclonedx: "gl-sbom-${ARCH}-*.cdx.json"
+      container_scanning: "gl-container-scanning-report.json"
+      cyclonedx: "gl-sbom-*.cdx.json"
     paths:
-      - "gl-container-scanning-report-${ARCH}.json"
-      - "gl-dependency-scanning-report-${ARCH}.json"
-      - "gl-sbom-${ARCH}-*.cdx.json"
+      - "gl-container-scanning-report.json"
+      - "gl-dependency-scanning-report.json"
+      - "gl-sbom-*.cdx.json"
   dependencies: []
   script:
     - if [ -z "${CS_IMAGE}" ]; then export CS_IMAGE="${CI_REGISTRY_IMAGE}:${ARCH}"; else export CS_IMAGE="${CS_IMAGE}-${ARCH}"; fi
