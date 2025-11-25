@@ -17,7 +17,7 @@ variables:
     paths: ["gl-container-scanning-report-${ARCH}.json", "gl-dependency-scanning-report-${ARCH}.json", "**/gl-sbom-${ARCH}-*.cdx.json"]
   dependencies: []
   script:
-    - if [ -z "${CS_IMAGE}" ]; then export CS_IMAGE="${CI_REGISTRY_IMAGE}/${CI_COMMIT_SHORT_SHA}:${ARCH}"; else export CS_IMAGE="${CS_IMAGE}-${ARCH}"; fi
+    - if [ -z "${CS_IMAGE}" ]; then export CS_IMAGE="${CI_REGISTRY_IMAGE}:${ARCH}"; else export CS_IMAGE="${CS_IMAGE}-${ARCH}"; fi
     - gtcs scan
   rules:
     - if: $CONTAINER_SCANNING_DISABLED == 'true' || $CONTAINER_SCANNING_DISABLED == '1'
