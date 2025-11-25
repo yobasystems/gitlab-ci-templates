@@ -18,6 +18,7 @@ variables:
   script:
     - if [ -z "${CS_IMAGE}" ]; then export CS_IMAGE="${CI_REGISTRY_IMAGE}:${ARCH}"; else export CS_IMAGE="${CS_IMAGE}-${ARCH}"; fi
     - gtcs scan
+    - cat gl-sbom-*.cdx.json | jq -r '["PACKAGE", "VERSION", "HASH (SHA-1)"], (.components[] | [.name, .version, (.hashes // [] | map(.content) | join(","))]) | @tsv' | column -t -s $'\t'
   rules:
     - if: $CONTAINER_SCANNING_DISABLED == 'true' || $CONTAINER_SCANNING_DISABLED == '1'
       when: never
