@@ -87,7 +87,7 @@ container_scanning_aarch64:
     - if: $CI_COMMIT_BRANCH
     - if: $CI_COMMIT_TAG
 
-sbom-amd64:
+sbom_amd64:
   <<: *sbom_definition
   tags:
     - security
@@ -97,7 +97,7 @@ sbom-amd64:
   variables:
     ARCH: amd64
 
-sbom-armhf:
+sbom_armhf:
   <<: *sbom_definition
   tags:
     - security
@@ -107,7 +107,7 @@ sbom-armhf:
   variables:
     ARCH: armhf
 
-sbom-aarch64:
+sbom_aarch64:
   <<: *sbom_definition
   tags:
     - security
