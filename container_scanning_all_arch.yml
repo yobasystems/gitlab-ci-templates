@@ -16,7 +16,7 @@ variables:
       cyclonedx: "**/gl-sbom-*.cdx.json"
     paths: [gl-container-scanning-report.json, "**/gl-sbom-*.cdx.json"]
   script:
-    - if [ -z "${CS_IMAGE}" ]; then export CS_IMAGE="${CI_REGISTRY_IMAGE}:${ARCH}"; else export CS_IMAGE="${CS_IMAGE}-${ARCH}"; fi
+    - if [ -z "${CS_IMAGE}" ]; then export CS_IMAGE="${CI_REGISTRY_IMAGE}/${CI_COMMIT_SHORT_SHA}:${ARCH}"; else export CS_IMAGE="${CS_IMAGE}-${ARCH}"; fi
     - gtcs scan
   rules:
     - if: $CONTAINER_SCANNING_DISABLED == 'true' || $CONTAINER_SCANNING_DISABLED == '1'
