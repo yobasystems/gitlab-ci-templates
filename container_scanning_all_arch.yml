@@ -74,13 +74,19 @@ container_scanning_aarch64:
     - apk add --no-cache jq util-linux
   script:
     - |
-      cat gl-sbom-report.cdx.json | jq -r '
-        ["PACKAGE", "VERSION", "HASH (SHA-1)"],
-        ["-------", "-------", "------------"],
-        (.components[] | [.name, .version, (.hashes // [] | map(.content) | join(","))]),
-        ["-------", "-------", "------------"],
-        ["TOTAL PACKAGES:", ([.components[] | select(.type != "operating-system")] | length | tostring), ""]
-      | @tsv' | column -t -s $'\t'
+      for sbom_file in gl-sbom-*.cdx.json; do
+        if [ ! -e "$sbom_file" ]; then
+          echo "No SBOM file found (gl-sbom-*.cdx.json)."
+          exit 1
+        fi
+        jq -r '
+          ["PACKAGE", "VERSION", "HASH (SHA-1)"],
+          ["-------", "-------", "------------"],
+          (.components[] | [.name, .version, (.hashes // [] | map(.content) | join(","))]),
+          ["-------", "-------", "------------"],
+          ["TOTAL PACKAGES:", ([.components[] | select(.type != "operating-system")] | length | tostring), ""]
+        | @tsv' "$sbom_file" | column -t -s $'\t'
+      done
   rules:
     - if: $CONTAINER_SCANNING_DISABLED == 'true' || $CONTAINER_SCANNING_DISABLED == '1'
       when: never
