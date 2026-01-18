@@ -10,21 +10,17 @@ please read the [documentation on GitLab CI][ci-docs]. Please keep in mind that
 these templates might need editing to suit your setup, and should be considered
 guideline.
 
-[ci-docs]: http://docs.gitlab.com/ce/ci/
+[ci-docs]: https://docs.gitlab.com/ee/ci/
 [gl-ci]: https://about.gitlab.com/gitlab-ci/
 
 
-To make runner run, then add the following tag: `security`
+To make the runner run, add the following tag: `security`.
 
-```
-include:remote
-```
+Use `include:remote` via the `include` keyword to pull a template from a public URL (see GitLab docs: https://docs.gitlab.com/ee/ci/yaml/#include):
 
-include:remote can be used to include a file from a different location, using HTTP/HTTPS, referenced by using the full URL. The remote file must be publicly accessible through a simple GET request as authentication schemas in the remote URL is not supported. For example:
-
-```
+```yaml
 include:
-  - remote: 'https://gitlab.com/yobasystems/gitlab-ci-templates/raw/master/container_scanning_all_arch.yml'
+  - remote: "https://gitlab.com/yobasystems/gitlab-ci-templates/raw/master/container_scanning_all_arch.yml"
 ```
 
-All nested includes will be executed without context as public user, so only another remote, or public project, or template is allowed.
+All nested includes are executed without context as a public user, so only another remote, public project, or built-in template is allowed.
